@@ -1,20 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { 
-  Document,
-  Folder,
-  Setting,
-  HomeFilled,
-  Headset,
-  ChatDotRound,
-  CaretBottom
-} from '@element-plus/icons-vue'
+import { Document, Folder, Setting, HomeFilled, Headset, ChatDotRound, CaretBottom } from '@element-plus/icons-vue'
 import VuePdfEmbed from 'vue-pdf-embed'
-
 const route = useRoute()
 const pdfUrl = ref('')
 const currentMode = ref('Deep Read')
+const isDropdownVisible = ref(false)
 
 onMounted(() => {
   // 这里后续会根据route.params.id获取具体的PDF文件URL
@@ -31,11 +23,20 @@ onMounted(() => {
           <h1 class="app-title">Handoff</h1>
         </div>
         <div class="header-right">
-          <!-- Switch 按钮 -->
-          <el-dropdown trigger="click" class="switch-dropdown">
+          <el-avatar :size="32" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alen" />
+          <span class="user-name">Alen Gao</span>
+          <span class="user-email">Alen.Gao482@gmail.com</span>
+        </div>
+      </el-header>
+
+      <!-- PDF内容区域 -->
+      <div class="main-content">
+        <div class="pdf-container">
+          <!-- 阅读模式选择器 -->
+          <el-dropdown trigger="click" class="mode-switch" @visible-change="visible => isDropdownVisible = visible">
             <div class="switch-button">
               <span>{{ currentMode }}</span>
-              <el-icon class="el-icon--right"><CaretBottom /></el-icon>
+              <el-icon class="el-icon--right" :class="{ 'is-reverse': isDropdownVisible }"><CaretBottom /></el-icon>
             </div>
             <template #dropdown>
               <el-dropdown-menu>
@@ -47,15 +48,6 @@ onMounted(() => {
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <el-avatar :size="32" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alen" />
-          <span class="user-name">Alen Gao</span>
-          <span class="user-email">Alen.Gao482@gmail.com</span>
-        </div>
-      </el-header>
-
-      <!-- PDF内容区域 -->
-      <div class="main-content">
-        <div class="pdf-container">
           <VuePdfEmbed :source="pdfUrl" />
         </div>
       </div>
@@ -175,6 +167,40 @@ onMounted(() => {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   min-height: calc(100vh - 180px);
+  position: relative;
+}
+
+.mode-switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.switch-button {
+  background-color: #004D40;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.switch-button:hover {
+  background-color: rgba(0, 77, 64 ) !important;
+  color: white !important;
+}
+
+.is-reverse {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
+
+.el-icon--right {
+  transition: transform 0.3s ease;
 }
 
 .floating-buttons {
