@@ -97,7 +97,7 @@ const recentNotes = ref([
       <!-- 顶部栏 -->
       <el-header class="header">
         <div class="header-left">
-          <h1 class="app-title">Handoff</h1>
+          <h1 class="app-title">💎 facetta</h1>
         </div>
         <div class="header-right">
           <el-avatar :size="32" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alen" />
