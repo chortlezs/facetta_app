@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Document, Folder, Setting, HomeFilled, Headset, ChatDotRound } from '@element-plus/icons-vue'
-
-// 当前选中的日期
-const currentDate = ref(new Date())
+import AppHeader from '../components/AppHeader.vue'
 
 // 最近文档数据
 const recentDocuments = ref([
@@ -95,16 +93,7 @@ const recentNotes = ref([
   <div class="app-wrapper">
     <div class="app-container">
       <!-- 顶部栏 -->
-      <el-header class="header">
-        <div class="header-left">
-          <h1 class="app-title">💎 facetta</h1>
-        </div>
-        <div class="header-right">
-          <el-avatar :size="32" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alen" />
-          <span class="user-name">Alen Gao</span>
-          <span class="user-email">Alen.Gao482@gmail.com</span>
-        </div>
-      </el-header>
+      <AppHeader />
 
       <!-- 主要内容区 -->
       <div class="main-content">
@@ -131,11 +120,14 @@ const recentNotes = ref([
           <h2>Recent Documents Section</h2>
           <div class="scroll-container">
             <div class="cards-container">
-              <div class="document-card" v-for="doc in recentDocuments" :key="doc.id" @click="$router.push(`/paper/${doc.id}`)">
+              <div class="document-card" v-for="doc in recentDocuments" :key="doc.id"
+                @click="$router.push(`/paper/${doc.id}`)">
                 <div class="card-content">
                   <div class="card-main">
                     <div class="card-icon folder-icon">
-                      <el-icon size="32"><Folder /></el-icon>
+                      <el-icon size="32">
+                        <Folder />
+                      </el-icon>
                     </div>
                     <h3>{{ doc.name }}</h3>
                   </div>
@@ -154,11 +146,14 @@ const recentNotes = ref([
           <h2>Recent Notes Section</h2>
           <div class="scroll-container">
             <div class="cards-container">
-              <div class="note-card" v-for="note in recentNotes" :key="note.id" @click="$router.push(`/paper/${note.id}`)">
+              <div class="note-card" v-for="note in recentNotes" :key="note.id"
+                @click="$router.push(`/paper/${note.id}`)">
                 <div class="card-content">
                   <div class="card-main">
                     <div class="card-icon document-icon">
-                      <el-icon size="32"><Document /></el-icon>
+                      <el-icon size="32">
+                        <Document />
+                      </el-icon>
                     </div>
                     <h3>{{ note.name }}</h3>
                   </div>
@@ -177,16 +172,24 @@ const recentNotes = ref([
       <el-footer class="footer">
         <el-menu mode="horizontal" class="footer-menu" default-active="1">
           <el-menu-item index="1">
-            <el-icon><HomeFilled /></el-icon>
+            <el-icon>
+              <HomeFilled />
+            </el-icon>
           </el-menu-item>
           <el-menu-item index="2">
-            <el-icon><Folder /></el-icon>
+            <el-icon>
+              <Folder />
+            </el-icon>
           </el-menu-item>
           <el-menu-item index="3">
-            <el-icon><Document /></el-icon>
+            <el-icon>
+              <Document />
+            </el-icon>
           </el-menu-item>
           <el-menu-item index="4">
-            <el-icon><Setting /></el-icon>
+            <el-icon>
+              <Setting />
+            </el-icon>
           </el-menu-item>
         </el-menu>
       </el-footer>
@@ -194,10 +197,14 @@ const recentNotes = ref([
       <!-- 悬浮按钮组 -->
       <div class="floating-buttons">
         <div class="floating-button">
-          <el-icon><Headset /></el-icon>
+          <el-icon>
+            <Headset />
+          </el-icon>
         </div>
         <div class="floating-button">
-          <el-icon><ChatDotRound /></el-icon>
+          <el-icon>
+            <ChatDotRound />
+          </el-icon>
         </div>
       </div>
     </div>
@@ -210,39 +217,7 @@ const recentNotes = ref([
   background-color: #f5f5f5;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #004D40;
-  color: white;
-  padding: 0 20px;
-}
 
-.header-left {
-  display: flex;
-  align-items: center;
-}
-
-.app-title {
-  margin: 0;
-  font-size: 24px;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.user-name {
-  font-weight: 500;
-}
-
-.user-email {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
-}
 
 .date-section {
   position: relative;
@@ -279,12 +254,15 @@ const recentNotes = ref([
   overflow-x: auto;
   padding: 10px 0;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
 }
 
 .cards-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }
 
 /* 悬浮按钮样式 */
@@ -324,7 +302,8 @@ const recentNotes = ref([
 
 .document-card,
 .note-card {
-  flex: 0 0 calc(20% - 16px); /* 5个卡片，减去间距 */
+  flex: 0 0 calc(20% - 16px);
+  /* 5个卡片，减去间距 */
   min-width: 200px;
   background: white;
   border-radius: 12px;
@@ -374,30 +353,38 @@ const recentNotes = ref([
 }
 
 @media screen and (max-width: 1200px) {
+
   .document-card,
   .note-card {
-    flex: 0 0 calc(25% - 15px); /* 4个卡片 */
+    flex: 0 0 calc(25% - 15px);
+    /* 4个卡片 */
   }
 }
 
 @media screen and (max-width: 992px) {
+
   .document-card,
   .note-card {
-    flex: 0 0 calc(33.333% - 14px); /* 3个卡片 */
+    flex: 0 0 calc(33.333% - 14px);
+    /* 3个卡片 */
   }
 }
 
 @media screen and (max-width: 768px) {
+
   .document-card,
   .note-card {
-    flex: 0 0 calc(50% - 10px); /* 2个卡片 */
+    flex: 0 0 calc(50% - 10px);
+    /* 2个卡片 */
   }
 }
 
 @media screen and (max-width: 480px) {
+
   .document-card,
   .note-card {
-    flex: 0 0 100%; /* 1个卡片 */
+    flex: 0 0 100%;
+    /* 1个卡片 */
   }
 }
 
@@ -414,6 +401,7 @@ const recentNotes = ref([
   align-items: center;
   justify-content: center;
 }
+
 .footer-menu .el-menu-item.is-active {
   color: white !important;
   background-color: rgba(255, 255, 255, 0.1) !important;

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
 import { Document, Folder, Setting, HomeFilled, Headset, ChatDotRound, CaretBottom } from '@element-plus/icons-vue'
 import VuePdfEmbed from 'vue-pdf-embed'
-const route = useRoute()
+import AppHeader from '../components/AppHeader.vue'
+
 const pdfUrl = ref('')
 const currentMode = ref('Deep Read')
 const isDropdownVisible = ref(false)
@@ -18,25 +18,19 @@ onMounted(() => {
   <div class="app-wrapper">
     <div class="app-container">
       <!-- 顶部栏 -->
-      <el-header class="header">
-        <div class="header-left">
-          <h1 class="app-title">Handoff</h1>
-        </div>
-        <div class="header-right">
-          <el-avatar :size="32" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alen" />
-          <span class="user-name">Alen Gao</span>
-          <span class="user-email">Alen.Gao482@gmail.com</span>
-        </div>
-      </el-header>
+      <AppHeader />
 
       <!-- PDF内容区域 -->
       <div class="main-content">
         <div class="pdf-container">
           <!-- 阅读模式选择器 -->
-          <el-dropdown trigger="click" class="mode-switch" @visible-change="visible => isDropdownVisible = visible">
+          <el-dropdown trigger="click" class="mode-switch"
+            @visible-change="(visible: boolean) => isDropdownVisible = visible">
             <div class="switch-button">
               <span>{{ currentMode }}</span>
-              <el-icon class="el-icon--right" :class="{ 'is-reverse': isDropdownVisible }"><CaretBottom /></el-icon>
+              <el-icon class="el-icon--right" :class="{ 'is-reverse': isDropdownVisible }">
+                <CaretBottom />
+              </el-icon>
             </div>
             <template #dropdown>
               <el-dropdown-menu>
@@ -56,16 +50,24 @@ onMounted(() => {
       <el-footer class="footer">
         <el-menu mode="horizontal" class="footer-menu" default-active="3">
           <el-menu-item index="1" @click="$router.push('/')">
-            <el-icon><HomeFilled /></el-icon>
+            <el-icon>
+              <HomeFilled />
+            </el-icon>
           </el-menu-item>
           <el-menu-item index="2">
-            <el-icon><Folder /></el-icon>
+            <el-icon>
+              <Folder />
+            </el-icon>
           </el-menu-item>
           <el-menu-item index="3">
-            <el-icon><Document /></el-icon>
+            <el-icon>
+              <Document />
+            </el-icon>
           </el-menu-item>
           <el-menu-item index="4">
-            <el-icon><Setting /></el-icon>
+            <el-icon>
+              <Setting />
+            </el-icon>
           </el-menu-item>
         </el-menu>
       </el-footer>
@@ -73,10 +75,14 @@ onMounted(() => {
       <!-- 悬浮按钮组 -->
       <div class="floating-buttons">
         <div class="floating-button">
-          <el-icon><Headset /></el-icon>
+          <el-icon>
+            <Headset />
+          </el-icon>
         </div>
         <div class="floating-button">
-          <el-icon><ChatDotRound /></el-icon>
+          <el-icon>
+            <ChatDotRound />
+          </el-icon>
         </div>
       </div>
     </div>
@@ -121,39 +127,7 @@ onMounted(() => {
   background-color: #f5f5f5;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #004D40;
-  color: white;
-  padding: 0 20px;
-}
 
-.header-left {
-  display: flex;
-  align-items: center;
-}
-
-.app-title {
-  margin: 0;
-  font-size: 24px;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.user-name {
-  font-weight: 500;
-}
-
-.user-email {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
-}
 
 .main-content {
   flex: 1;
@@ -190,7 +164,7 @@ onMounted(() => {
 }
 
 .switch-button:hover {
-  background-color: rgba(0, 77, 64 ) !important;
+  background-color: rgba(0, 77, 64) !important;
   color: white !important;
 }
 
@@ -267,10 +241,6 @@ onMounted(() => {
 }
 
 @media screen and (max-width: 768px) {
-  .header-right .user-email {
-    display: none;
-  }
-
   .main-content {
     padding: 10px;
   }
