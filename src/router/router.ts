@@ -14,6 +14,11 @@ const router = createRouter({
       name: "paper",
       component: () => import("../views/PaperView.vue"),
     },
+    {
+      path: "/audio",
+      name: "audio",
+      component: () => import("../views/AudioView.vue"),
+    },
   ],
 });
 

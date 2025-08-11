@@ -25,7 +25,7 @@ onMounted(() => {
         <div class="pdf-container">
           <!-- 阅读模式选择器 -->
           <el-dropdown trigger="click" class="mode-switch"
-            @visible-change="(visible: boolean) => isDropdownVisible = visible">
+            @visible-change="(visible) => isDropdownVisible = visible">
             <div class="switch-button">
               <span>{{ currentMode }}</span>
               <el-icon class="el-icon--right" :class="{ 'is-reverse': isDropdownVisible }">
@@ -54,9 +54,9 @@ onMounted(() => {
               <HomeFilled />
             </el-icon>
           </el-menu-item>
-          <el-menu-item index="2">
+          <el-menu-item index="2" @click="$router.push('/audio')">
             <el-icon>
-              <Folder />
+              <Headset />
             </el-icon>
           </el-menu-item>
           <el-menu-item index="3">

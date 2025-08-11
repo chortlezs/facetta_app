@@ -176,9 +176,9 @@ const recentNotes = ref([
               <HomeFilled />
             </el-icon>
           </el-menu-item>
-          <el-menu-item index="2">
+          <el-menu-item index="2" @click="$router.push('/audio')">
             <el-icon>
-              <Folder />
+              <Headset />
             </el-icon>
           </el-menu-item>
           <el-menu-item index="3">

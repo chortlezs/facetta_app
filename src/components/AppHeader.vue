@@ -14,6 +14,13 @@ withDefaults(defineProps<Props>(), {
 })
 </script>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({
+  name: 'AppHeader'
+})
+</script>
+
 <template>
   <el-header class="header">
     <div class="header-left">
@@ -67,4 +74,4 @@ withDefaults(defineProps<Props>(), {
     display: none;
   }
 }
-</style> 
+</style>
